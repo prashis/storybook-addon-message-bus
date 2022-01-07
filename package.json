@@ -2,7 +2,11 @@
   "name": "@prashis/storybook-addon-message-bus",
   "version": "1.0.0",
   "description": "Interact with message bus via Storybook UI",
-  "keywords": ["message-bus", "storybook-addon", "storybook"],
+  "keywords": [
+    "message-bus",
+    "storybook-addon",
+    "storybook"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prashis/storybook-addon-message-bus.git"
@@ -12,7 +16,12 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/ts/index.d.ts",
-  "files": ["dist/**/*", "README.md", "*.js", "*.d.ts"],
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
   "scripts": {
     "clean": "rimraf ./dist",
     "buildBabel": "concurrently \"npm run buildBabel:cjs\" \"npm run buildBabel:esm\"",
@@ -39,7 +48,6 @@
     "@babel/preset-typescript": "^7.13.0",
     "@storybook/addon-essentials": "^6.4.9",
     "@storybook/react": "^6.4.9",
-    "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
     "boxen": "^5.0.1",
     "concurrently": "^6.2.0",

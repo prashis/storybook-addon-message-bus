@@ -1,37 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useParameter } from "@storybook/api";
+import React from "react";
 import { AddonPanel } from "@storybook/components";
+import { useChannel, useParameter } from "@storybook/api";
 import { PanelContent } from "./components/PanelContent";
 import { EVENTS } from "./constants";
-import type { API } from "@storybook/api";
-import type { Event, Emit, OnEmitEvent } from "./typings";
+import { Event, OnEmitArg } from "./typings";
 
 interface PanelProps {
   active: boolean;
-  api: API;
 }
 
-export const ControlPanel: React.FC<PanelProps> = (props) => {
-  const { active, api } = props;
+export const Panel: React.FC<PanelProps> = (props) => {
+  // https://storybook.js.org/docs/react/addons/addons-api#useparameter
+  const events = useParameter<Event[]>("events", []);
 
-  const [events, setEvents] = useState([]);
+  // https://storybook.js.org/docs/react/addons/addons-api#usechannel
+  const emit = useChannel({});
 
-  const onAdd = (events: Event[]) => {
-    setEvents(events);
+  const onEmit = (event: OnEmitArg) => {
+    emit(EVENTS.EMIT, event);
   };
 
-  const onEmit = (event: OnEmitEvent) => {
-  console.log(event);
-
-    api.emit(EVENTS.EMIT, event);
-  };
-
-  useEffect(() => {
-    api.on(EVENTS.ADD, onAdd);
-    return () => api.off(EVENTS.ADD, onAdd);
-  }, []);
-
-  return active ? (
+  return props.active ? (
     <AddonPanel {...props}>
       <PanelContent {...{ onEmit, events }} />
     </AddonPanel>

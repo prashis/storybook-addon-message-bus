@@ -1,3 +1,3 @@
-import type { DecoratorFunction } from "@storybook/csf";
+import { DecoratorFunction } from "@storybook/csf";
 
 export const decorators = [] as DecoratorFunction[];
