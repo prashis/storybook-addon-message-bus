@@ -1,14 +1,24 @@
 declare module "global";
 
-export type Emit = (event: string, payload: unknown) => void;
+export type EventName = string;
+export type EventPayload = unknown;
 
 export type Event = {
-  name: string;
+  name: EventName;
   description?: string;
-  payload: unknown;
+  payload: EventPayload;
 };
 
-export type OnEmitEvent = {
-  name: string;
-  payload: unknown;
+export type EmitterCallback = (event: EventName, payload: EventPayload) => void;
+
+export type OnEmitArg = {
+  name: EventName;
+  payload: EventPayload;
+};
+
+export type OnEmitFn = (args: OnEmitArg) => void;
+
+export type PreDecoratorOptions = {
+  emitter: EmitterCallback;
+  events: Event[];
 };
